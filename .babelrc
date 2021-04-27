@@ -1,0 +1,10 @@
+{
+  "presets": ["@babel/preset-react", "@babel/preset-env"],
+  "plugins": [
+     ["@babel/transform-runtime"],[
+      "@babel/plugin-syntax-class-properties"
+    ],[
+      "@babel/plugin-proposal-class-properties"
+    ]
+  ]
+}
