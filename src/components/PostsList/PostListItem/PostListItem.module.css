@@ -1,0 +1,9 @@
+.postListItem {
+  margin-bottom: 2rem;
+  padding: 1rem;
+
+  width: 20rem;
+  height: auto;
+  border: 1px solid black;
+  background-color: blanchedalmond;
+}

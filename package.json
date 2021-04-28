@@ -7,9 +7,8 @@
     "build:start": "cd dist && PORT=8080 npx serve",
     "start": "webpack serve --open --mode development",
     "start:live": "webpack serve --open --mode development --liveReload",
-     "docker:build": "docker build . -t wp5-starter",
+    "docker:build": "docker build . -t wp5-starter",
     "docker:run": "docker run -p 8080:8080 wp5-starter"
-   
   },
   "license": "MIT",
   "author": {
@@ -34,8 +33,14 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
+    "@reduxjs/toolkit": "^1.5.1",
     "axios": "^0.21.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0",
+    "redux-actions": "^2.6.5",
+    "redux-persist": "^6.0.0",
+    "reselect": "^4.0.0"
   }
 }

@@ -1,16 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import store from "./redux/store";
 
-import Container from "./components/Container/Container";
-import MyApp from "./components/MyApp";
-
-// import "./index.css";
+import PostsApp from "./components/PostsApp";
 
 const App = () => {
   return (
-    <Container>
-      <MyApp />
-    </Container>
+    <Provider store={store.store}>
+      <PersistGate loading={null} persistor={store.persistor}>
+        <PostsApp />
+      </PersistGate>
+    </Provider>
   );
 };
 
