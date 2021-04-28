@@ -9,8 +9,6 @@ class SearchBar extends Component {
     query: "",
   };
 
-  //   searchInputId = shortid.generate();
-
   handleSearchInputChange = (e) => {
     const { value } = e.currentTarget;
     this.setState({

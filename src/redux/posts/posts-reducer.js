@@ -14,7 +14,7 @@ import actions from "./posts-actions";
 
 const posts = createReducer([], {
   [actions.fetchPostsSuccess]: (state, action) => [...state, ...action.payload],
-  [actions.cleanPosts]: (_, __) => [],
+  [actions.cleanPosts]: (state, __) => (state = []),
 });
 
 export default combineReducers({

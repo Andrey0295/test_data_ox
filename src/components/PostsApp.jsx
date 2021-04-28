@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AppBar from "./AppBar";
+
 import Container from "./Container/Container";
 import PostsList from "./PostsList/PostsList";
 import SearchBar from "./SearchBar/SearchBar";
@@ -13,10 +13,10 @@ class PostsApp extends Component {
     currentPage: 1,
     searchQuery: "",
   };
-  // componentDidMount() {
-  //   const { fetchPosts } = this.props;
-  //   fetchPosts(this.state.searchQuery, this.state.currentPage);
-  // }
+  componentDidMount() {
+    const { fetchPosts } = this.props;
+    fetchPosts(this.state.searchQuery, this.state.currentPage);
+  }
   componentDidUpdate(prevProps, prevState) {
     const { currentPage, searchQuery } = this.state;
     if (
@@ -25,9 +25,6 @@ class PostsApp extends Component {
     ) {
       this.props.fetchPosts(searchQuery, currentPage);
     }
-    // if (prevState.searchQuery !== searchQuery) {
-    //   this.props.fetchPosts(searchQuery, currentPage);
-    // }
   }
 
   handleClick = () => {
@@ -38,15 +35,14 @@ class PostsApp extends Component {
 
   onChangeQuery = (query) => {
     this.setState({ searchQuery: query, currentPage: 1 });
-    this.props.cleanState;
+    this.props.cleanState();
   };
 
   render() {
     return (
       <>
-        <AppBar />
+        <SearchBar onSubmit={this.onChangeQuery} />
         <Container>
-          <SearchBar onSubmit={this.onChangeQuery} />
           <div>
             <h1>Hello Posts</h1>
           </div>

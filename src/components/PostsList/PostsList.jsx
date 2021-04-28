@@ -8,13 +8,16 @@ import styles from "./PostList.module.css";
 const PostsList = ({ postsData, onDelete }) => {
   return (
     <ul className={styles.postsList}>
-      {postsData.map(({ id, title, body }) => (
+      {postsData.map((post) => (
         <PostsListItem
-          key={id}
-          postId={id}
-          onDelete={onDelete}
-          title={title}
-          body={body}
+          key={post.id}
+          postId={post.id}
+          onDelete={post.onDelete}
+          title={post.title}
+          body={post.body}
+          authorName={post.user.name}
+          userName={post.user.username}
+          postComments={post.comments}
         />
       ))}
     </ul>
