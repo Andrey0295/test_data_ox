@@ -24,8 +24,12 @@ const PostsList = ({ postsData, onDelete }) => {
   );
 };
 
+// const mapStateToProps = (state) => ({
+//   contactsData: contactsSelectors.getVisibleContacts(state),
+// });
+
 const mapStateToProps = (state) => ({
-  postsData: postsSelectors.getAllPosts(state),
+  postsData: postsSelectors.getVisiblePosts(state),
 });
 
 export default connect(mapStateToProps, null)(PostsList);

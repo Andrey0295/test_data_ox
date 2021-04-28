@@ -6,10 +6,14 @@ const fetchPostsError = createAction("posts/fetchPostsError");
 
 const cleanPosts = createAction("posts/cleanPosts");
 
+const changeFilter = createAction("posts/changeFilter");
+
 export default {
   fetchPostsRequest,
   fetchPostsSuccess,
   fetchPostsError,
+
+  changeFilter,
 
   cleanPosts,
 };

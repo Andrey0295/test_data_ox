@@ -17,6 +17,11 @@ const posts = createReducer([], {
   [actions.cleanPosts]: (state, __) => (state = []),
 });
 
+const filter = createReducer("", {
+  [actions.changeFilter]: (_, { payload }) => payload,
+});
+
 export default combineReducers({
   posts,
+  filter,
 });

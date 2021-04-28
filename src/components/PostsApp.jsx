@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar/SearchBar";
 import { connect } from "react-redux";
 import postsOperations from "../redux/posts/posts-operations";
 import postsActions from "../redux/posts/posts-actions";
+import Filter from "./Filter/Filter";
 
 class PostsApp extends Component {
   state = {
@@ -46,6 +47,7 @@ class PostsApp extends Component {
           <div>
             <h1>Hello Posts</h1>
           </div>
+          <Filter />
           {!this.state.isLoading && <PostsList onDelete={() => {}} />}
           <button type="button" onClick={this.handleClick}>
             Get More Posts

@@ -1,0 +1,9 @@
+.filterLabel {
+  font-size: 1.5rem;
+}
+.filterInput {
+  width: 15rem;
+  height: 2rem;
+  margin-left: 3rem;
+  margin-bottom: 2rem;
+}
