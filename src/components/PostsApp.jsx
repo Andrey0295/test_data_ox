@@ -2,52 +2,51 @@ import React, { Component } from "react";
 import AppBar from "./AppBar";
 import Container from "./Container/Container";
 import PostsList from "./PostsList/PostsList";
-import axios from "axios";
+import SearchBar from "./SearchBar/SearchBar";
+
 import { connect } from "react-redux";
 import postsOperations from "../redux/posts/posts-operations";
-import postsSelectors from "../redux/posts/posts-selectors";
+import postsActions from "../redux/posts/posts-actions";
 
 class PostsApp extends Component {
   state = {
     currentPage: 1,
-    // posts: [],
-    // isLoading: false,
+    searchQuery: "",
   };
-  componentDidMount() {
-    const { fetchPosts } = this.props;
-    fetchPosts(this.state.currentPage);
-    // console.log(postsSelectors.getCurrentPage());
-    // this.setState({ isLoading: true });
-    // this.fetchPosts();
-  }
+  // componentDidMount() {
+  //   const { fetchPosts } = this.props;
+  //   fetchPosts(this.state.searchQuery, this.state.currentPage);
+  // }
   componentDidUpdate(prevProps, prevState) {
-    const { currentPage } = this.state;
-    if (prevState.currentPage !== currentPage) {
-      this.props.fetchPosts(currentPage);
+    const { currentPage, searchQuery } = this.state;
+    if (
+      prevState.currentPage !== currentPage ||
+      prevState.searchQuery !== searchQuery
+    ) {
+      this.props.fetchPosts(searchQuery, currentPage);
     }
+    // if (prevState.searchQuery !== searchQuery) {
+    //   this.props.fetchPosts(searchQuery, currentPage);
+    // }
   }
 
   handleClick = () => {
     this.setState(({ currentPage }) => ({
       currentPage: currentPage + 1,
     }));
-    // this.props.fetchPosts(this.state.currentPage);
   };
 
-  // fetchPosts = () => {
-  //   axios
-  //     .get("https://jsonplaceholder.typicode.com/posts?_page=1&_limit=9")
-  //     .then((res) => {
-  //       this.setState({ posts: res.data });
-  //       console.log(res.data);
-  //     })
-  //     .finally(this.setState({ isLoading: false }));
+  onChangeQuery = (query) => {
+    this.setState({ searchQuery: query, currentPage: 1 });
+    this.props.cleanState;
+  };
 
   render() {
     return (
       <>
         <AppBar />
         <Container>
+          <SearchBar onSubmit={this.onChangeQuery} />
           <div>
             <h1>Hello Posts</h1>
           </div>
@@ -62,8 +61,9 @@ class PostsApp extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchPosts: (currentPage) =>
-    dispatch(postsOperations.fetchPosts(currentPage)),
+  fetchPosts: (searchQuery, currentPage) =>
+    dispatch(postsOperations.fetchPosts(searchQuery, currentPage)),
+  cleanState: () => dispatch(postsActions.cleanPosts()),
 });
 
 export default connect(null, mapDispatchToProps)(PostsApp);

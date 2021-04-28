@@ -13,8 +13,6 @@ import storage from "redux-persist/lib/storage";
 
 import postsReducer from "./posts/posts-reducer";
 
-// import contactsReducer from "./contacts/contacts-reducer";
-
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
