@@ -3,7 +3,7 @@ import { createReducer } from "@reduxjs/toolkit";
 
 import actions from "./posts-actions";
 
-const { fetchPostsSuccess } = actions;
+// const { fetchPostsSuccess } = actions;
 
 // const contacts = createReducer([], {
 //   [fetchContactsSuccess]: (_, { payload }) => payload,
@@ -12,7 +12,9 @@ const { fetchPostsSuccess } = actions;
 //     state.filter((contact) => contact.id !== payload),
 // });
 
-const posts = createReducer([], () => {});
+const posts = createReducer([], {
+  [actions.fetchPostsSuccess]: (state, action) => [...state, ...action.payload],
+});
 
 export default combineReducers({
   posts,

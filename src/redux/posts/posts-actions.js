@@ -1,8 +1,8 @@
 import { createAction } from "@reduxjs/toolkit";
 
-const fetchPostsRequest = createAction("contacts/fetchPostsRequest");
-const fetchPostsSuccess = createAction("contacts/fetchPostsSuccess");
-const fetchPostsError = createAction("contacts/fetchPostsError");
+const fetchPostsRequest = createAction("posts/fetchPostsRequest");
+const fetchPostsSuccess = createAction("posts/fetchPostsSuccess");
+const fetchPostsError = createAction("posts/fetchPostsError");
 
 export default {
   fetchPostsRequest,

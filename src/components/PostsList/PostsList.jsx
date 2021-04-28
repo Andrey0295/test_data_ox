@@ -1,5 +1,7 @@
 import React from "react";
 import PostsListItem from "./PostListItem/PostsListItem";
+import { connect } from "react-redux";
+import postsSelectors from "../../redux/posts/posts-selectors";
 
 import styles from "./PostList.module.css";
 
@@ -26,15 +28,20 @@ const PostsList = ({ postsData, onDelete }) => {
   );
 };
 
-export default PostsList;
+// export default PostsList;
 
 // const mapStateToProps = (state) => ({
 //   contactsData: contactsSelectors.getVisibleContacts(state),
 // });
+const mapStateToProps = (state) => ({
+  postsData: postsSelectors.getAllPosts(state),
+});
 
 // const mapDispatchToProps = (dispatch) => ({
 //   onDelete: (contactId) =>
 //     dispatch(contactsOperations.deleteContact(contactId)),
 // });
+
+export default connect(mapStateToProps, null)(PostsList);
 
 // export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
