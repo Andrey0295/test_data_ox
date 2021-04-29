@@ -6,7 +6,7 @@ import postsOperations from "../../redux/posts/posts-operations";
 
 import styles from "./PostList.module.css";
 
-const PostsList = ({ postsData, onDelete }) => {
+const PostsList = ({ postsData, onDelete, updatePost }) => {
   return (
     <ul className={styles.postsList}>
       {postsData.map((post) => (
@@ -19,6 +19,7 @@ const PostsList = ({ postsData, onDelete }) => {
           authorName={post.user.name}
           userName={post.user.username}
           postComments={post.comments}
+          // handleSubmit={updatePost}
         />
       ))}
     </ul>

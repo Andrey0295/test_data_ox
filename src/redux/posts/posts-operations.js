@@ -3,8 +3,6 @@ import actions from "./posts-actions";
 axios.defaults.baseURL = "https://jsonplaceholder.typicode.com";
 import shortid from "shortid";
 
-const newUserId = shortid.generate();
-
 const fetchPosts = (searchQuery = "", page) => (dispatch) => {
   dispatch(actions.fetchPostsRequest);
 
@@ -27,6 +25,26 @@ const addPost = ({ title, body, username = "" }) => (dispatch) => {
     .catch(({ message }) => dispatch(actions.addPostsError(message)));
 };
 
+// const toggleCompleted = ({ id, completed }) => dispatch => {
+//   const update = { completed };
+
+//   dispatch(toggleCompletedRequest());
+
+//   axios
+//     .patch(`/todos/${id}`, update)
+//     .then(({ data }) => dispatch(toggleCompletedSuccess(data)))
+//     .catch(error => dispatch(toggleCompletedError(error)));
+// };
+
+const updatePosts = ({ postId, title, body }) => (dispatch) => {
+  const updateData = { title, body };
+  dispatch(actions.updatePostsRequest);
+  axios
+    .patch(`/posts/${postId}`, updateData)
+    .then((responce) => dispatch(actions.updatePostsSuccess(responce.data)))
+    .catch((error) => dispatch(actions.updatePostsError(error)));
+};
+
 const deletePost = (postId) => (dispatch) => {
   dispatch(actions.deletePostsRequest());
 
@@ -40,4 +58,5 @@ export default {
   fetchPosts,
   addPost,
   deletePost,
+  updatePosts,
 };

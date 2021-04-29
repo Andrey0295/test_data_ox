@@ -8,6 +8,10 @@ const addPostsRequest = createAction("posts/addPostsRequest");
 const addPostsSuccess = createAction("posts/addPostsSuccess");
 const addPostsError = createAction("posts/addPostsError");
 
+const updatePostsRequest = createAction("posts/updatePostsRequest");
+const updatePostsSuccess = createAction("posts/updatePostsSuccess");
+const updatePostsError = createAction("posts/updatePostsError");
+
 const deletePostsRequest = createAction("posts/deletePostsRequest");
 const deletePostsSuccess = createAction("posts/deletePostsSuccess");
 const deletePostsError = createAction("posts/deletePostsError");
@@ -23,6 +27,9 @@ export default {
   addPostsRequest,
   addPostsSuccess,
   addPostsError,
+  updatePostsRequest,
+  updatePostsSuccess,
+  updatePostsError,
   deletePostsRequest,
   deletePostsSuccess,
   deletePostsError,

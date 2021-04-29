@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import shortid from "shortid";
 
+// import postsOperations from "../../redux/posts/posts-operations";
 import postsOperations from "../../redux/posts/posts-operations";
+import postsSelectors from "../../redux/posts/posts-selectors";
 
 // import contactsOperations from "../../redux/contacts/contacts-operations";
 // import contactsSelectors from "../../redux/contacts/contacts-selectors";
 
-import styles from "./PostCreator.module.css";
+import styles from "./PostEditor.module.css";
 
-class PostsCreator extends Component {
+class PostsEditor extends Component {
   state = {
     title: "",
     body: "",
@@ -24,14 +26,20 @@ class PostsCreator extends Component {
   };
 
   onFormSubmit = (e) => {
-    const { title } = this.state;
-    const { allPosts, onSubmit } = this.props;
     e.preventDefault();
+    const { title } = this.state;
+    const { postId } = this.props;
+    const { allPosts, onSubmit } = this.props;
+    // const postId = this.props.allPosts.id;
+    const updateData = {
+      title: this.state.title,
+      body: this.state.body,
+      postId: postId,
+    };
 
-    // allPosts.filter((post) => post.title === title).length > 0
-    //   ? alert(`${title} is already in post-list`)
-    //   : onSubmit(this.state);
-    onSubmit(this.state);
+    onSubmit(updateData);
+
+    // onSubmit(this.state);
 
     this.setState({
       title: "",
@@ -53,8 +61,8 @@ class PostsCreator extends Component {
           id={this.titleInputId}
         />
         <label htmlFor={this.bodyInputId}>Body</label>
-        <textarea
-          className={styles.textField}
+        <input
+          className={styles.formInput}
           type="text"
           name="body"
           value={body}
@@ -68,13 +76,20 @@ class PostsCreator extends Component {
     );
   }
 }
-// const mapStateToProps = (state) => ({
-//   allContacts: contactsSelectors.getAllContacts(state),
-// });
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit: ({ title, body }) =>
-    dispatch(postsOperations.addPost({ title, body })),
+const mapStateToProps = (state) => ({
+  allPosts: postsSelectors.getAllPosts(state),
 });
 
-export default connect(null, mapDispatchToProps)(PostsCreator);
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit: (updateData) => dispatch(postsOperations.updatePosts(updateData)),
+  // { title, body }
+});
+
+// const mapDispatchToProps = (dispatch) => ({
+//   onSubmit: ({ title, body, postId }) =>
+//     dispatch(postsOperations.updatePosts({ title, body, postId })),
+//   // { title, body }
+// });
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostsEditor);
+// export default PostsEditor;
