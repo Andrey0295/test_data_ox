@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const PostsComments = ({ comments }) => {
   return (
@@ -11,6 +12,14 @@ const PostsComments = ({ comments }) => {
       ))}
     </ul>
   );
+};
+
+PostsComments.propTypes = {
+  comments: PropTypes.array,
+};
+
+PostsComments.defaultProps = {
+  comments: [],
 };
 
 export default PostsComments;

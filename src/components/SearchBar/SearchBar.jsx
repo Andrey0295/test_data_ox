@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-// import PropTypes from "prop-types";
-// import shortid from "shortid";
+import PropTypes from "prop-types";
+import shortid from "shortid";
 
 import styles from "./SearchBar.module.css";
 
@@ -27,17 +27,18 @@ class SearchBar extends Component {
   };
 
   render() {
+    const searchInputId = shortid.generate();
     const { query } = this.state;
     return (
       <header className={styles.Searchbar}>
         <form className={styles.SearchForm} onSubmit={this.handleSubmit}>
-          <label htmlFor="22"></label>
+          <label htmlFor={searchInputId}></label>
           <input
             className={styles.SearchFormInput}
             type="text"
             value={query}
             onChange={this.handleSearchInputChange}
-            id="22"
+            id={searchInputId}
             placeholder="Search posts"
             autoFocus
           />
@@ -50,8 +51,8 @@ class SearchBar extends Component {
   }
 }
 
-// SearchBar.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
+SearchBar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default SearchBar;

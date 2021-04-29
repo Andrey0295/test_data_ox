@@ -1,11 +1,9 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import shortid from "shortid";
 
 import postsOperations from "../../redux/posts/posts-operations";
-
-// import contactsOperations from "../../redux/contacts/contacts-operations";
-// import contactsSelectors from "../../redux/contacts/contacts-selectors";
 
 import styles from "./PostCreator.module.css";
 
@@ -24,13 +22,9 @@ class PostsCreator extends Component {
   };
 
   onFormSubmit = (e) => {
-    const { title } = this.state;
-    const { allPosts, onSubmit } = this.props;
+    const { onSubmit } = this.props;
     e.preventDefault();
 
-    // allPosts.filter((post) => post.title === title).length > 0
-    //   ? alert(`${title} is already in post-list`)
-    //   : onSubmit(this.state);
     onSubmit(this.state);
 
     this.setState({
@@ -68,9 +62,10 @@ class PostsCreator extends Component {
     );
   }
 }
-// const mapStateToProps = (state) => ({
-//   allContacts: contactsSelectors.getAllContacts(state),
-// });
+
+PostsCreator.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: ({ title, body }) =>

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 import PostsComments from "../../PostsComments/PostsComments";
 import Overlay from "../../Overlay/Overlay";
 import PostsEditor from "../../PostsEditor/PostsEditor";
+import Button from "../../Button/Button";
+
 import styles from "./PostListItem.module.css";
 
 const PostsListItem = ({
@@ -12,27 +15,19 @@ const PostsListItem = ({
   postId,
   authorName,
   userName,
-  // handleSubmit,
 
   postComments,
 }) => {
   const [showComments, setShowComments] = useState(false);
   const [showEditor, setShowEditor] = useState(false);
-  const handleClick = () => {
+
+  const openComments = () => {
     setShowComments(!showComments);
   };
-  const openEditor = () => {
+
+  const toggleEditor = () => {
     setShowEditor(!showEditor);
   };
-
-  // const handlePostData = (data) => {
-  //   const post = {
-  //     id: postId,
-  //     title: data.title,
-  //     body: data.body,
-  //   };
-  //   return post;
-  // };
 
   return (
     <li className={styles.postListItem}>
@@ -44,26 +39,43 @@ const PostsListItem = ({
       <p>
         User-name: <span>{userName}</span>
       </p>
-      <button type="button" onClick={() => onDelete(postId)}>
+      <button
+        style={{ backgroundColor: "red" }}
+        type="button"
+        onClick={() => onDelete(postId)}
+      >
         Delete
       </button>
-      <button type="button" onClick={openEditor}>
-        Update
-      </button>
+      <Button onClick={toggleEditor} text={"Update"} />
+
       <div>
-        <button type="button" onClick={handleClick}>
-          Comments
-        </button>
+        <Button onClick={openComments} text={"Comments"} />
 
         {showEditor && (
-          <Overlay onClose={openEditor}>
-            <PostsEditor postId={postId} />
+          <Overlay onClose={toggleEditor}>
+            <PostsEditor postId={postId} onCloseModal={toggleEditor} />
           </Overlay>
         )}
         {showComments && <PostsComments comments={postComments} />}
       </div>
     </li>
   );
+};
+
+PostsListItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  postId: PropTypes.number.isRequired,
+  userName: PropTypes.string.isRequired,
+  body: PropTypes.string,
+  authorName: PropTypes.string,
+  postComments: PropTypes.array,
+};
+
+PostsListItem.defaultProps = {
+  body: "",
+  authorName: "",
+  postComments: [],
 };
 
 export default PostsListItem;

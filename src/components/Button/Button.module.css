@@ -1,0 +1,9 @@
+.btnComponent {
+  width: 7rem;
+  height: 2rem;
+
+  margin: 0.5rem;
+
+  color: white;
+  background-color: blue;
+}

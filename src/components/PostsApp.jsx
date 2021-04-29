@@ -1,13 +1,14 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+import postsOperations from "../redux/posts/posts-operations";
+import postsActions from "../redux/posts/posts-actions";
 
 import Container from "./Container/Container";
 import PostsList from "./PostsList/PostsList";
 import SearchBar from "./SearchBar/SearchBar";
 import PostCreator from "./PostsCreator/PostsCreator";
-
-import { connect } from "react-redux";
-import postsOperations from "../redux/posts/posts-operations";
-import postsActions from "../redux/posts/posts-actions";
 import Filter from "./Filter/Filter";
 
 class PostsApp extends Component {
@@ -17,15 +18,18 @@ class PostsApp extends Component {
   };
   componentDidMount() {
     const { fetchPosts } = this.props;
-    fetchPosts(this.state.searchQuery, this.state.currentPage);
+    const { searchQuery, currentPage } = this.state;
+
+    fetchPosts(searchQuery, currentPage);
   }
   componentDidUpdate(prevProps, prevState) {
     const { currentPage, searchQuery } = this.state;
+    const { fetchPosts } = this.props;
     if (
       prevState.currentPage !== currentPage ||
       prevState.searchQuery !== searchQuery
     ) {
-      this.props.fetchPosts(searchQuery, currentPage);
+      fetchPosts(searchQuery, currentPage);
     }
   }
 
@@ -36,8 +40,9 @@ class PostsApp extends Component {
   };
 
   onChangeQuery = (query) => {
+    const { cleanState } = this.props;
     this.setState({ searchQuery: query, currentPage: 1 });
-    this.props.cleanState();
+    cleanState();
   };
 
   render() {
@@ -50,7 +55,7 @@ class PostsApp extends Component {
           </div>
           <Filter />
           <PostCreator />
-          {!this.state.isLoading && <PostsList onDelete={() => {}} />}
+          <PostsList onDelete={() => {}} />
           <button type="button" onClick={this.handleClick}>
             Get More Posts
           </button>
@@ -59,6 +64,11 @@ class PostsApp extends Component {
     );
   }
 }
+
+PostsApp.propTypes = {
+  fetchPosts: PropTypes.func.isRequired,
+  cleanState: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = (dispatch) => ({
   fetchPosts: (searchQuery, currentPage) =>

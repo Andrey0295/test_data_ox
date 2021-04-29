@@ -1,12 +1,15 @@
 import React from "react";
-import PostsListItem from "./PostListItem/PostsListItem";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
 import postsSelectors from "../../redux/posts/posts-selectors";
 import postsOperations from "../../redux/posts/posts-operations";
 
+import PostsListItem from "./PostListItem/PostsListItem";
+
 import styles from "./PostList.module.css";
 
-const PostsList = ({ postsData, onDelete, updatePost }) => {
+const PostsList = ({ postsData, onDelete }) => {
   return (
     <ul className={styles.postsList}>
       {postsData.map((post) => (
@@ -19,11 +22,15 @@ const PostsList = ({ postsData, onDelete, updatePost }) => {
           authorName={post.user.name}
           userName={post.user.username}
           postComments={post.comments}
-          // handleSubmit={updatePost}
         />
       ))}
     </ul>
   );
+};
+
+PostsList.propTypes = {
+  postsData: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

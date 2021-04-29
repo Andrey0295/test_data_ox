@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 import styles from "./Overlay.module.css";
 
@@ -35,13 +35,13 @@ class Overlay extends Component {
   }
 }
 
-// Modal.propTypes = {
-//   children: PropTypes.node,
-//   onClose: PropTypes.func.isRequired,
-// };
+Overlay.propTypes = {
+  children: PropTypes.node,
+  onClose: PropTypes.func.isRequired,
+};
 
-// Modal.defaultProps = {
-//   children: [],
-// };
+Overlay.defaultProps = {
+  children: [],
+};
 
 export default Overlay;

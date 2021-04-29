@@ -1,57 +1,61 @@
 import axios from "axios";
 import actions from "./posts-actions";
+
 axios.defaults.baseURL = "https://jsonplaceholder.typicode.com";
-import shortid from "shortid";
+
+const {
+  fetchPostsRequest,
+  fetchPostsSuccess,
+  fetchPostsError,
+  addPostsRequest,
+  addPostsSuccess,
+  addPostsError,
+  updatePostsRequest,
+  updatePostsSuccess,
+  updatePostsError,
+  deletePostsRequest,
+  deletePostsSuccess,
+  deletePostsError,
+} = actions;
 
 const fetchPosts = (searchQuery = "", page) => (dispatch) => {
-  dispatch(actions.fetchPostsRequest);
+  dispatch(fetchPostsRequest());
 
   axios
     .get(
       `/posts?q=${searchQuery}&_embed=comments&_expand=user&_page=${page}&_limit=9`
     )
-    .then((responce) => dispatch(actions.fetchPostsSuccess(responce.data)))
-    .catch((error) => dispatch(actions.fetchPostsError(error)));
+    .then((responce) => dispatch(fetchPostsSuccess(responce.data)))
+    .catch(({ message }) => dispatch(fetchPostsError(message)));
 };
 
 const addPost = ({ title, body, username = "" }) => (dispatch) => {
   const post = { title, body, user: { username } };
 
-  dispatch(actions.addPostsRequest());
+  dispatch(addPostsRequest());
 
   axios
     .post("/posts", post)
-    .then(({ data }) => dispatch(actions.addPostsSuccess(data)))
-    .catch(({ message }) => dispatch(actions.addPostsError(message)));
+    .then(({ data }) => dispatch(addPostsSuccess(data)))
+    .catch(({ message }) => dispatch(addPostsError(message)));
 };
-
-// const toggleCompleted = ({ id, completed }) => dispatch => {
-//   const update = { completed };
-
-//   dispatch(toggleCompletedRequest());
-
-//   axios
-//     .patch(`/todos/${id}`, update)
-//     .then(({ data }) => dispatch(toggleCompletedSuccess(data)))
-//     .catch(error => dispatch(toggleCompletedError(error)));
-// };
 
 const updatePosts = ({ postId, title, body }) => (dispatch) => {
   const updateData = { title, body };
-  dispatch(actions.updatePostsRequest);
+  dispatch(updatePostsRequest());
   axios
     .patch(`/posts/${postId}`, updateData)
-    .then((responce) => dispatch(actions.updatePostsSuccess(responce.data)))
-    .catch((error) => dispatch(actions.updatePostsError(error)));
+    .then(({ data }) => dispatch(updatePostsSuccess(data)))
+    .catch(({ message }) => dispatch(updatePostsError(message)));
 };
 
 const deletePost = (postId) => (dispatch) => {
-  dispatch(actions.deletePostsRequest());
+  dispatch(deletePostsRequest());
 
   axios
     .delete(`/posts/${postId}`)
-    .then(() => dispatch(actions.deletePostsSuccess(postId)))
-    .catch((error) => dispatch(actions.deletePostsError(error)));
+    .then(({ data }) => dispatch(deletePostsSuccess(data)))
+    .catch(({ message }) => dispatch(deletePostsError(message)));
 };
 
 export default {
