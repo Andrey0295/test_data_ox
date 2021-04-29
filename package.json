@@ -1,6 +1,7 @@
 {
   "name": "wp5-starter-react",
   "version": "1.0.1",
+ 
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
@@ -8,7 +9,10 @@
     "start": "webpack serve --open --mode development",
     "start:live": "webpack serve --open --mode development --liveReload",
     "docker:build": "docker build . -t wp5-starter",
-    "docker:run": "docker run -p 8080:8080 wp5-starter"
+    "docker:run": "docker run -p 8080:8080 wp5-starter",
+    "predeploy": "npm run build",
+    "deploy": "netlify deploy -p"
+    
   },
   "license": "MIT",
   "author": {
@@ -35,6 +39,7 @@
     "@babel/runtime": "^7.13.10",
     "@reduxjs/toolkit": "^1.5.1",
     "axios": "^0.21.1",
+    "gh-pages": "^3.1.0",
     "modern-normalize": "^1.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
