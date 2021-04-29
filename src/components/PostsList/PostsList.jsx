@@ -2,6 +2,7 @@ import React from "react";
 import PostsListItem from "./PostListItem/PostsListItem";
 import { connect } from "react-redux";
 import postsSelectors from "../../redux/posts/posts-selectors";
+import postsOperations from "../../redux/posts/posts-operations";
 
 import styles from "./PostList.module.css";
 
@@ -12,7 +13,7 @@ const PostsList = ({ postsData, onDelete }) => {
         <PostsListItem
           key={post.id}
           postId={post.id}
-          onDelete={post.onDelete}
+          onDelete={onDelete}
           title={post.title}
           body={post.body}
           authorName={post.user.name}
@@ -24,12 +25,12 @@ const PostsList = ({ postsData, onDelete }) => {
   );
 };
 
-// const mapStateToProps = (state) => ({
-//   contactsData: contactsSelectors.getVisibleContacts(state),
-// });
-
 const mapStateToProps = (state) => ({
   postsData: postsSelectors.getVisiblePosts(state),
 });
 
-export default connect(mapStateToProps, null)(PostsList);
+const mapDispatchToProps = (dispatch) => ({
+  onDelete: (postId) => dispatch(postsOperations.deletePost(postId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostsList);

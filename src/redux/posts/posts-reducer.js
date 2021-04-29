@@ -12,8 +12,11 @@ import actions from "./posts-actions";
 //     state.filter((contact) => contact.id !== payload),
 // });
 
-const posts = createReducer([], {
+const post = createReducer([], {
   [actions.fetchPostsSuccess]: (state, action) => [...state, ...action.payload],
+  [actions.addPostsSuccess]: (state, action) => [...state, action.payload],
+  [actions.deletePostsSuccess]: (state, action) =>
+    state.filter((post) => post.id !== action.payload),
   [actions.cleanPosts]: (state, __) => (state = []),
 });
 
@@ -22,6 +25,6 @@ const filter = createReducer("", {
 });
 
 export default combineReducers({
-  posts,
+  post,
   filter,
 });

@@ -22,9 +22,9 @@ const middleware = [
 ];
 
 const postsPersistConfig = {
-  key: "auth-key",
+  key: "posts-key",
   storage,
-  whitelist: ["token"],
+  whitelist: ["post"],
 };
 
 const store = configureStore({

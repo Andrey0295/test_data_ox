@@ -42,6 +42,7 @@
     "redux": "^4.1.0",
     "redux-actions": "^2.6.5",
     "redux-persist": "^6.0.0",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "shortid": "^2.2.16"
   }
 }

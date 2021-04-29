@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Container from "./Container/Container";
 import PostsList from "./PostsList/PostsList";
 import SearchBar from "./SearchBar/SearchBar";
+import PostCreator from "./PostsCreator/PostsCreator";
 
 import { connect } from "react-redux";
 import postsOperations from "../redux/posts/posts-operations";
@@ -48,6 +49,7 @@ class PostsApp extends Component {
             <h1>Hello Posts</h1>
           </div>
           <Filter />
+          <PostCreator />
           {!this.state.isLoading && <PostsList onDelete={() => {}} />}
           <button type="button" onClick={this.handleClick}>
             Get More Posts

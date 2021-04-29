@@ -28,7 +28,9 @@ const PostsListItem = ({
       <p>
         User-name: <span>{userName}</span>
       </p>
-      <button type="button" onClick={() => onDelete(postId)}></button>
+      <button type="button" onClick={() => onDelete(postId)}>
+        Delete
+      </button>
       <div>
         <button type="button" onClick={handleClick}>
           Comments

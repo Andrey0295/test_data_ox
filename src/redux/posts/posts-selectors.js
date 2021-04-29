@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-const getAllPosts = (state) => state.posts.posts;
+const getAllPosts = (state) => state.posts.post;
 
 const getFilterValue = (state) => state.posts.filter;
 
